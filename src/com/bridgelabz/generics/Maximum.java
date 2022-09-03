@@ -1,27 +1,28 @@
 package com.bridgelabz.generics;
 
-public class Maximum<T> {T a;
-    T b;
-    T c;
-
-    public Maximum(T a, T b, T c) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-    }
+public class Maximum<T extends Comparable<T>> {
     public static void main(String[] args) {
+    Maximum.<Integer>findMaximum(6, 7, 8, 9, 54, 76, 43);
 
-        System.out.println("Maximum Integer -> " +findMax(43,23,33));
-        System.out.println("Maximum Float -> " +findMax(19.5F,13.4F,18.8F));
-        System.out.println("Maximum String -> " +findMax("Apple","Banana","PineApple"));
-    }
+    Maximum.<Float>findMaximum(5.6f, 6.7f, 7.8f, 8.9f);
 
-    public static <T extends Comparable <T>> T findMax(T a,T b, T c){
-        T max = a;
-        if(b.compareTo(max) > 0)
-            max = b;
-        if(c.compareTo(max) > 0)
-            max = c;
+    Maximum.<String>findMaximum("Mango", "orange", "Banana", "Apple", "Grapes");
+}
+    public static <T extends Comparable <T>> T findMaximum(T... value) {
+        T max = value[0];
+        for (int i = 0; i < value.length; i++) {
+            if (value[i].compareTo(max) > 0) {
+                max = value[i];
+            }
+        }
+        System.out.println("given values are : ");
+        for (int i = 0; i < value.length; i++) {
+            System.out.println(value[i]);
+        }
+        printMax(max);
         return max;
+    }
+    private static<T> void printMax(T max) {
+        System.out.println("Maximum value -> " +max);
     }
 }
